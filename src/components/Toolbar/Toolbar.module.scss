@@ -1,0 +1,67 @@
+.toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #F0FAFB;
+    height: 75px;
+}
+.toolbar__logo {
+    margin-left: 1rem;
+}
+
+.toolbar__logo label {
+    color: #000000;
+    text-decoration: none;
+    display: flex;
+    margin-top: 4px;
+    font-size: 1.5rem;
+}
+
+.toolbar__navigation {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1rem;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.toggle_button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 24px;
+    width: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.toggle_button:focus {
+    outline: none;
+}
+
+.toggle_button_line {
+    width: 30px;
+    height: 2px;
+    background: #000000;
+}
+
+.text2 {
+    height: 24x;
+    width: 350px;
+    color: #000000;
+    font-family: 'Gilroy';
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 56px;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+}

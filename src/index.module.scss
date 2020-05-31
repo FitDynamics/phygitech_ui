@@ -1,0 +1,29 @@
+// @import url('./theme.scss');
+
+@font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  src: url('./assets/fonts/Gilroy-Regular.ttf') format('truetype'),
+}
+
+@font-face {
+  font-family: 'Gilroy-Bold';
+  font-style: normal;
+  src: url('./assets/fonts/Gilroy-Bold.ttf') format('truetype'),
+}
+
+@font-face {
+  font-family: 'Gilroy-Light';
+  font-style: normal;
+  src: url('./assets/fonts/Gilroy-Light.ttf') format('truetype'),
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Gilroy';
+  overflow-x: hidden;
+}
+
+code {
+  font-family: 'Gilroy';
+}

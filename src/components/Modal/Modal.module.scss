@@ -1,0 +1,30 @@
+.modalBlock {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: block;
+    z-index: 100;
+  }
+
+.modalNone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+  }
+  
+  .modalMain {
+    position:fixed;
+    background: #F0FAFB;
+    width: 50%;
+    height: 550px;
+    top:50%;
+    left:65%;
+    transform: translate(-50%,-50%);
+  }

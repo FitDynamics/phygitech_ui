@@ -1,0 +1,158 @@
+.sidebar {
+   background: #F0FAFB;
+   height: 75px;
+   display: flex;
+   justify-content: space-between;
+   position: fixed;
+   width: 350px;
+}
+
+.side_drawer_open {
+    height: 100%;
+    background: white;
+    box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70%;
+    max-width: 350px;
+    z-index: 200;
+}
+
+.sidebar__logo {
+    margin: 1rem 0;
+    display: flex;
+}
+
+.sidebar__logo label {
+    color: #000000;
+    text-decoration: none;
+    font-size: 1.5rem;
+    display: flex;
+    margin-left: 1rem;
+    margin-top: 10px;
+    width: 115px;
+}
+
+.sidebar__navigation {
+    display: flex;
+}
+
+.toggle_button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 24px;
+    width: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.toggle_button:focus {
+    outline: none;
+}
+
+.toggle_button_line {
+    width: 30px;
+    height: 2px;
+    background: #000000;
+}
+
+.image {
+    height: 48px;
+    width: 60px;
+    margin-left: 1rem;
+}
+
+.image2 {
+    height: 250px;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 75px;
+}
+
+.text {
+    height: 24x;
+    width: 102px;
+    color: #000000;
+    font-family: 'Gilroy';
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 56px;
+    position: absolute;
+    top: 325px;
+    left: 135px;
+}
+
+.rectangle {
+    height: 50px;
+    width: 350px;
+    background-color: #F0FAFB;
+    color: '#939393';
+    font-family: 'Gilroy';
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 15px;
+    position: absolute;
+    top: 400px;
+}
+
+.rectangle:hover, 
+.rectangle:active {
+    background-color: rgb(202, 202, 202);
+}
+
+.label {
+    height: 24x;
+    width: 200px;
+    color: #000000;
+    font-family: 'Gilroy';
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 56px;
+    position: absolute;
+    left: 56px;
+}
+
+.rectangle2 {
+    height: 50px;
+    width: 350px;
+    background-color: #F0FAFB;
+    color: '#939393';
+    font-family: 'Gilroy';
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 15px;
+    position: absolute;
+    top: 475px;
+}
+
+.rectangle3 {
+    height: 50px;
+    width: 350px;
+    background-color: #F0FAFB;
+    color: '#939393';
+    font-family: 'Gilroy';
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 15px;
+    position: absolute;
+    top: 550px;
+}
+
+.rectangle2:hover, 
+.rectangle2:active {
+    background-color: rgb(202, 202, 202);
+}
+
+
+.spacing {
+    margin-top:12px;
+    margin-left: 80px;
+    cursor: pointer;
+}

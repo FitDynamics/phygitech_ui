@@ -6,6 +6,7 @@ import Student from './components/student/student'
 import Teacher from './components/teacher/teacher'
 import Org from './components/org/org'
 import Admin from './components/admin/admin'
+import Branch from './components/branch/branch'
 
 let app = (
   <BrowserRouter>
@@ -15,6 +16,7 @@ let app = (
           <Route path = '/teacher' component = { Teacher } />
           <Route path = '/org' component = { Org } />
           <Route path = '/admin' component = { Admin } />
+          <Route path = '/branch' component = { Branch } />
       </div>
   </BrowserRouter>
 )

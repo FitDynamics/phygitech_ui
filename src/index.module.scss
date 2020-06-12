@@ -17,11 +17,24 @@
   font-style: normal;
   src: url('./assets/fonts/Gilroy-Light.ttf') format('truetype'),
 }
+
+@font-face {
+  font-family: 'Gilroy-SemiBold';
+  font-style: normal;
+  src: url('./assets/fonts/Gilroy-SemiBold.ttf') format('truetype'),
+}
+
+@font-face {
+  font-family: 'Gilroy-Medium';
+  font-style: normal;
+  src: url('./assets/fonts/Gilroy-Medium.ttf') format('truetype'),
+}
 body {
   margin: 0;
   padding: 0;
   font-family: 'Gilroy';
-  overflow-x: hidden;
+  overflow-x: auto;
+  overflow-y: scroll;
 }
 
 code {

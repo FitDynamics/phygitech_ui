@@ -17,6 +17,7 @@
     width: 70%;
     max-width: 350px;
     z-index: 200;
+    overflow-y: scroll;
 }
 
 .sidebar__logo {
@@ -99,11 +100,21 @@
     line-height: 15px;
     position: absolute;
     top: 400px;
+    cursor: pointer;
 }
 
-.rectangle:hover, 
-.rectangle:active {
+.other {
+    height: 50px;
+    width: 350px;
     background-color: rgb(202, 202, 202);
+    color: '#939393';
+    font-family: 'Gilroy';
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 15px;
+    position: absolute;
+    top: 400px;
+    cursor: pointer;
 }
 
 .label {
@@ -117,6 +128,7 @@
     line-height: 56px;
     position: absolute;
     left: 56px;
+    cursor: pointer;
 }
 
 .rectangle2 {
@@ -130,6 +142,21 @@
     line-height: 15px;
     position: absolute;
     top: 475px;
+    cursor: pointer;
+}
+
+.other2 {
+    height: 50px;
+    width: 350px;
+    background-color: rgb(202, 202, 202);
+    color: '#939393';
+    font-family: 'Gilroy';
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 15px;
+    position: absolute;
+    top: 475px;
+    cursor: pointer;
 }
 
 .rectangle3 {
@@ -143,13 +170,50 @@
     line-height: 15px;
     position: absolute;
     top: 550px;
+    cursor: pointer;
 }
 
-.rectangle2:hover, 
-.rectangle2:active {
+.other3 {
+    height: 50px;
+    width: 350px;
     background-color: rgb(202, 202, 202);
+    color: '#939393';
+    font-family: 'Gilroy';
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 15px;
+    position: absolute;
+    top: 550px;
+    cursor: pointer;
 }
 
+.rectangle4 {
+    height: 50px;
+    width: 350px;
+    background-color: #F0FAFB;
+    color: '#939393';
+    font-family: 'Gilroy';
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 15px;
+    position: absolute;
+    top: 625px;
+    cursor: pointer;
+}
+
+.other4 {
+    height: 50px;
+    width: 350px;
+    background-color: rgb(202, 202, 202);
+    color: '#939393';
+    font-family: 'Gilroy';
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 15px;
+    position: absolute;
+    top: 625px;
+    cursor: pointer;
+}
 
 .spacing {
     margin-top:12px;

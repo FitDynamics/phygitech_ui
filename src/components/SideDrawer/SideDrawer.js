@@ -6,28 +6,7 @@ import profile from '../../assets/icons/profile.png'
 
 export class SideDrawer extends Component {
 
-    state = {
-        tab1: false,
-        tab2: false
-    }
-
-    handleClick = value => {
-        if (value === "tab1") {
-            this.setState({
-                tab1: true,
-                tab2: false
-            })
-        } else if (value === "tab2") {
-            this.setState({
-                tab2: true,
-                tab1: false
-            })
-        }
-    }
-
     render() {
-        console.log(this.state.tab1)
-        console.log(this.state.tab2)
 
         return (
             <div>
@@ -51,20 +30,26 @@ export class SideDrawer extends Component {
                         <label className={styles.text}> {this.props.name} </label>
 
                         { this.props.tab1 ?
-                        <div className={styles.rectangle} onClick={() => this.handleClick('tab1')}>
+                        <div className={this.props.selected1 ? styles.other : styles.rectangle} onClick={() => this.props.click('tab1')}>
                             <label className={styles.label}> {this.props.tab1} </label>
                         </div>
                         : null }
 
                         { this.props.tab2 ? 
-                        <div className={styles.rectangle2} onClick={() => this.handleClick('tab2')}>
+                        <div className={this.props.selected2 ? styles.other2 : styles.rectangle2} onClick={() => this.props.click('tab2')}>
                             <label className={styles.label}> {this.props.tab2} </label>
                         </div>
                         : null }
 
                         { this.props.tab3 ? 
-                        <div className={styles.rectangle3} onClick={() => this.handleClick('tab3')}>
+                        <div className={this.props.selected3 ? styles.other3 : styles.rectangle3} onClick={() => this.props.click('tab3')}>
                             <label className={styles.label}> {this.props.tab3} </label>
+                        </div>
+                        : null }
+
+                        { this.props.tab4 ? 
+                        <div className={this.props.selected4 ? styles.other4 : styles.rectangle4} onClick={() => this.props.click('tab4')}>
+                            <label className={styles.label}> {this.props.tab4} </label>
                         </div>
                         : null }
 

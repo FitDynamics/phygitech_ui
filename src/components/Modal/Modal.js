@@ -2,13 +2,12 @@ import React from 'react';
 import styles from './Modal.module.scss'
 
 
-const Modal = ({ handleClose, show, children }) => {
+const Modal = ({ handleClose, show, type, children }) => {
   
     return (
       <div className={ show ? styles.modalBlock : styles.modalNone }>
-        <section className={styles.modalMain}>
+        <section className={ ((type === "org") ? styles.modalMain : null) || ((type === "admin") ? styles.modalMain2 : null)}>
           {children}
-          <button onClick={handleClose}>close</button>
         </section>
       </div>
     );

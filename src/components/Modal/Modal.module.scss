@@ -23,7 +23,17 @@
     position:fixed;
     background: #F0FAFB;
     width: 50%;
-    height: 550px;
+    height: 600px;
+    top:45%;
+    left:65%;
+    transform: translate(-50%,-50%);
+  }
+
+  .modalMain2 {
+    position:fixed;
+    background: #F0FAFB;
+    width: 50%;
+    height: 500px;
     top:50%;
     left:65%;
     transform: translate(-50%,-50%);

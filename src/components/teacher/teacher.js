@@ -47,19 +47,19 @@ export class teacher extends Component {
     handleClick = value => {
         if (value === "tab1") {
             this.setState({
-                selectedtab1: !this.state.selectedtab1,
+                selectedtab1: true,
                 selectedtab2: false,
                 selectedtab3: false
             })
         } else if (value === "tab2") {
             this.setState({
-                selectedtab2: !this.state.selectedtab2,
+                selectedtab2: true,
                 selectedtab1: false,
                 selectedtab3: false
             })
         } else if (value === "tab3") {
             this.setState({
-                selectedtab3: !this.state.selectedtab3,
+                selectedtab3: true,
                 selectedtab1: false,
                 selectedtab2: false
             })
@@ -120,8 +120,8 @@ export class teacher extends Component {
                     { this.state.sideDrawerOpen ? 
                     <div style={{position: 'absolute', top: '200px', right: '50px'}}>
                             <div className={styles.item3}>
-                                <label className={styles.text} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '25px'}}> Meeting Name </label>
-                                <label className={styles.text2} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '250px'}}> Meeting Date </label>
+                                <label className={styles.text} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '25px'}}> Session Name </label>
+                                <label className={styles.text2} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '250px'}}> Session Date </label>
                                 <label className={styles.text3} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '475px'}}> Start Time </label>
                                 <label className={styles.text4} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '675px'}}> End Time</label>
                             </div>
@@ -129,8 +129,8 @@ export class teacher extends Component {
                     :
                     <div style={{position: 'absolute', top: '200px', right: '50px'}}>
                         <div className={styles.item4}>
-                            <label className={styles.text5} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '75px'}}> Meeting Name </label>
-                            <label className={styles.text6} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '400px'}}> Meeting Date </label>
+                            <label className={styles.text5} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '75px'}}> Session Name </label>
+                            <label className={styles.text6} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '400px'}}> Session Date </label>
                             <label className={styles.text7} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '725px'}}> Start Time  </label>
                             <label className={styles.text8} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '1050px'}}> End Time </label>
                         </div>

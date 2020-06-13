@@ -200,13 +200,13 @@ export class org extends Component {
     handleClick = value => {
         if (value === "tab1") {
             this.setState({
-                selectedtab1: !this.state.selectedtab1,
+                selectedtab1: true,
                 selectedtab2: false,
                 selectedtab3: false
             })
         } else if (value === "tab2") {
             this.setState({
-                selectedtab2: !this.state.selectedtab2,
+                selectedtab2: true,
                 selectedtab1: false,
                 selectedtab3: false
             })

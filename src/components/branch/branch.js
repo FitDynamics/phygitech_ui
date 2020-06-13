@@ -141,34 +141,26 @@ export class branch extends Component {
         starttime: '',
         endtime: '',
         details: [],
-        classname: null,
         showClassList: false,
         meetingoptions: [],
-        teacheroptions: [
-            { name: 'Mr Saurabh Sharma',  mobileNo: 8723782372, address: 'Kengeri', class: 'Class 8B' },
-            { name: 'Mrs Archana', mobileNo: 8723781938, address: 'Sarjapur', class: 'Class 4A' },
-            { name: 'Mr Rakshith',  mobileNo: 9281937282, address: 'HSR Layout', class: 'Class 6D' }
-        ],
-        classroomoptions : [
-            { name: 'Class 8A',  teacher: "Mr Tyagi", category: "Pre-Primary", branch: 'Yelhanka' },
-            { name: 'Class 9A', teacher: 'Ms Shalini', category: "Primary", branch: 'JP Nagar' },
-            { name: 'Class 3C',  teacher: 'Mr Vivek', category: "Secondary", branch: 'Basvangudi' }
-        ],
-        studentoptions: [
-            { name: 'Akhil Sharma',  mobileNo: 9232322323, address: 'Jayanagar', class: 'Class 4D' },
-            { name: 'Rahul Agarwal', mobileNo: 9276372367, address: 'Marathahalli', class: 'Class 8F' },
-            { name: 'Rajath Gowda',  mobileNo: 9267246728, address: 'Bommanahalli', class: 'Class 3D' }
-        ],
-        classnameoptions: [
-            { label: 'Class 8A', value: 1},
-            { label: 'Class 9C', value: 2},
-            { label: 'Class 10A', value: 3},
-        ],
+        teacheroptions: [],
+        classroomoptions : [],
+        studentoptions: [],
+        classnameoptions: [],
+        teachernameoptions: [],
         classroomname: "",
         classroomteacher: "",
-        classroombranch: "",
-        classCategory: ""
-
+        classCategory: "",
+        teachername: "",
+        teachernameId: "",
+        teacheremail: "",
+        teachermobileno: "",
+        teacheraddress: "",
+        teacherclassId: null,
+        studentname: "",
+        studentemail: "",
+        studentaddress: "",
+        studentmobile: ""
     };
 
     componentDidMount(){
@@ -208,32 +200,106 @@ export class branch extends Component {
     handleClick = value => {
         if (value === "tab1") {
             this.setState({
-                selectedtab1: !this.state.selectedtab1,
+                selectedtab1: true,
                 selectedtab2: false,
                 selectedtab3: false,
                 selectedtab4: false
             })
         } else if (value === "tab2") {
             this.setState({
-                selectedtab2: !this.state.selectedtab2,
+                selectedtab2: true,
                 selectedtab1: false,
                 selectedtab3: false,
                 selectedtab4: false
             })
+
+            axios.get(config.serverUrl + "classrooms")
+            .then(response => {
+               if (response.status === 200){ 
+                this.setState({
+                    classroomoptions: response.data
+                    })
+                }}
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
+
+            axios.get(config.serverUrl + "teachers")
+            .then(response => {
+               if (response.status === 200){ 
+                this.setState({
+                    teachernameoptions: response.data
+                    })
+                }}
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
+
         } else if (value === "tab3") {
             this.setState({
-                selectedtab3: !this.state.selectedtab3,
+                selectedtab3: true,
                 selectedtab1: false,
                 selectedtab2: false,
                 selectedtab4: false,
             })
+
+            axios.get(config.serverUrl + "classrooms")
+            .then(response => {
+               if (response.status === 200){ 
+                this.setState({
+                    classnameoptions: response.data
+                    })
+                }}
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
+
+            axios.get(config.serverUrl + "teachers")
+            .then(response => {
+               if (response.status === 200){ 
+                this.setState({
+                    teacheroptions: response.data
+                    })
+                }}
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
+
         } else if (value === "tab4") {
             this.setState({
-                selectedtab4: !this.state.selectedtab4,
+                selectedtab4: true,
                 selectedtab1: false,
                 selectedtab2: false,
                 selectedtab3: false,
             })
+
+            axios.get(config.serverUrl + "classrooms")
+            .then(response => {
+               if (response.status === 200){ 
+                this.setState({
+                    classnameoptions: response.data
+                    })
+                }}
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
+
+            axios.get(config.serverUrl + "students")
+            .then(response => {
+               if (response.status === 200){ 
+                this.setState({
+                    studentoptions: response.data
+                    })
+                }}
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
         }
     }
 
@@ -255,6 +321,46 @@ export class branch extends Component {
         } else if (value === "teacher") {
             this.setState({
                classroomteacher: event.target.value
+            })
+        }
+    }
+
+    handleTeacherEvent = (event, value) => {
+        if (value === "name") {
+            this.setState({
+                teachername: event.target.value
+            })
+        } else if (value === "email") {
+            this.setState({
+                teacheremail: event.target.value
+            })
+        } else if (value === "address") {
+            this.setState({
+               teacheraddress: event.target.value
+            })
+        } else if (value === "mobile") {
+            this.setState({
+               teachermobileno: event.target.value
+            })
+        }
+    }
+
+    handleStudentEvent = (event, value) => {
+        if (value === "name") {
+            this.setState({
+                studentname: event.target.value
+            })
+        } else if (value === "email") {
+            this.setState({
+                studentemail: event.target.value
+            })
+        } else if (value === "address") {
+            this.setState({
+               studentaddress: event.target.value
+            })
+        } else if (value === "mobile") {
+            this.setState({
+               studentmobile: event.target.value
             })
         }
     }
@@ -378,27 +484,24 @@ export class branch extends Component {
 
     onFormClassSubmit = () => {
 
-        // let data = {
-        //     name: this.state.name,
-        //     scheduledDate: date,
-        //     startTime: starttime,
-        //     endTime: endtime,
-        //     uniqueMeetingId: meetingID
-        // }
+        let data = {
+            name: this.state.classroomname,
+            category: this.state.classCategory,
+            classTeacher: this.state.teacherclassId.value
+        }
 
-        // axios.post(config.serverUrl + "classroom", )
-        //     .then(response => 
-        //         (response.status === 200) ? console.log("ADDED") : console.log("NOT ADDED")
-        //     ) 
-        //     .catch(error => {
-        //         console.log("error",error);
-        //     });
+        axios.post(config.serverUrl + "classroom", data )
+            .then(response => 
+                (response.status === 200) ? console.log("ADDED") : console.log("NOT ADDED")
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
 
         let innerobj = {
             name: this.state.classroomname,
-            branch: this.state.classroombranch,
             category: this.state.classCategory,
-            teacher: this.state.classroomteacher
+            teacher: this.state.teacherclassId.label
         }
 
         this.state.classroomoptions.push(innerobj)
@@ -406,13 +509,80 @@ export class branch extends Component {
         this.setState({
             addorg: !this.state.addorg
         })
-
     }
 
-    handleChange = classname => {
+    onFormTeacherSubmit = () => {
 
-        this.setState({ classname });
-        console.log(`Option selected:`, classname);
+        let data = {
+            name: this.state.teachername,
+            mobileNo: this.state.teachermobileno,
+            email: this.state.teacheremail,
+            class: this.state.teacherclassId.value,
+            address: {
+                city: this.state.teacheraddress
+            }
+        }
+
+        axios.post(config.serverUrl + "teacher", data )
+            .then(response => 
+                (response.status === 200) ? console.log("ADDED") : console.log("NOT ADDED")
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
+        let innerobj = {
+            name: this.state.teachername,
+            mobileNo: this.state.teachermobileno,
+            address: this.state.teacheraddress,
+            class: this.state.teacherclassId.label
+        }
+
+        this.state.teacheroptions.push(innerobj)
+
+        this.setState({
+            addorg: !this.state.addorg
+        })
+    }
+
+    onFormStudentSubmit = () => {
+
+        let data = {
+            name: this.state.studentname,
+            mobileNo: this.state.studentmobile,
+            email: this.state.studentemail,
+            class: this.state.teacherclassId.value,
+            address: {
+                city: this.state.studentaddress
+            }
+        }
+
+        axios.post(config.serverUrl + "student", data )
+            .then(response => 
+                (response.status === 200) ? console.log("ADDED") : console.log("NOT ADDED")
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
+
+        let innerobj = {
+            name: this.state.studentname,
+            mobileNo: this.state.studentmobile,
+            address: this.state.studentaddress,
+            class: this.state.teacherclassId.label
+        }
+
+        this.state.studentoptions.push(innerobj)
+
+        this.setState({
+            addorg: !this.state.addorg
+        })
+    }
+
+
+    handleChange = teacherclassId => {
+
+        this.setState({ teacherclassId });
+        console.log(`Option selected:`, teacherclassId);
     };
 
     classList = () => {
@@ -465,10 +635,9 @@ export class branch extends Component {
                 <div>
                     { this.state.sideDrawerOpen ? 
                     <div className={styles.item}>
-                            <label className={styles.text}> {item.name} </label>
-                            <label className={styles.text2}> {item.teacher }</label>
-                            <label className={styles.text3}> {item.category} </label>
-                            <label className={styles.text4}> {item.branch} </label>
+                            <label className={styles.text9}> {item.name} </label>
+                            <label className={styles.text10}> {item.teacher }</label>
+                            <label className={styles.text11}> {item.category} </label>
                     </div> : 
                     <div className={styles.item2}>
                             <label className={styles.text5}> {item.name} </label>
@@ -524,7 +693,7 @@ export class branch extends Component {
             );
         })
 
-        console.log(this.state.showClassList)
+        console.log(this.state.teacherclassId)
 
         return (
             <div style={{height: "100%"}}>
@@ -552,8 +721,8 @@ export class branch extends Component {
                     { this.state.sideDrawerOpen ? 
                     <div style={{position: 'absolute', top: '200px', right: '50px'}}>
                             <div className={styles.item3}>
-                                <label className={styles.text} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '50px'}}> Meeting Name </label>
-                                <label className={styles.text2} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '300px'}}> Meeting Date </label>
+                                <label className={styles.text} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '50px'}}> Session Name </label>
+                                <label className={styles.text2} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '300px'}}> Session Date </label>
                                 <label className={styles.text3} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '550px'}}> Start Time </label>
                                 <label className={styles.text4} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '775px'}}> End Time</label>
                             </div>
@@ -561,8 +730,8 @@ export class branch extends Component {
                     :
                     <div style={{position: 'absolute', top: '200px', right: '50px'}}>
                         <div className={styles.item4}>
-                            <label className={styles.text5} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '75px'}}> Meeting Name </label>
-                            <label className={styles.text6} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '400px'}}> Meeting Date </label>
+                            <label className={styles.text5} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '75px'}}> Session Name </label>
+                            <label className={styles.text6} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '400px'}}> Session Date </label>
                             <label className={styles.text7} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '725px'}}> Start Time  </label>
                             <label className={styles.text8} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '1050px'}}> End Time </label>
                         </div>
@@ -633,9 +802,8 @@ export class branch extends Component {
                     <div style={{position: 'absolute', top: '200px', right: '50px'}}>
                             <div className={styles.item3}>
                                 <label className={styles.text} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '50px'}}> Classroom Name </label>
-                                <label className={styles.text2} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '300px'}}> Class Teacher </label>
-                                <label className={styles.text3} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '550px'}}> Class Category</label>
-                                <label className={styles.text4} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '775px'}}> Branch </label>
+                                <label className={styles.text2} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '375px'}}> Class Teacher </label>
+                                <label className={styles.text3} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '650px'}}> Class Category</label>
                             </div>
                     </div>
                     :
@@ -644,7 +812,6 @@ export class branch extends Component {
                             <label className={styles.text5} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '75px'}}>  Classroom Name </label>
                             <label className={styles.text6} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '400px'}}> Class Teacher </label>
                             <label className={styles.text7} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '725px'}}> Class Category </label>
-                            <label className={styles.text8} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '1050px'}}> Branch </label>
                         </div>
                     </div> }
 
@@ -659,19 +826,22 @@ export class branch extends Component {
 
                     { this.state.addorg ? 
                     <div> 
-                        <Modal type="org" show={this.state.addorg}>
+                        <Modal type="admin" show={this.state.addorg}>
                             <div>
                                 <h1 className={styles.heading}> Classroom Details Form </h1>
                                 <label className={styles.label}> Name </label>
                                 <input value={this.state.classroomname} className={styles.input} type="text" onChange={(event) => this.handleClassEvent(event, "name")} />
 
-                                <label className={styles.label}> Branch </label>
-                                <input value={this.state.classroombranch} className={styles.input} type="text" onChange={(event) => this.handleClassEvent(event, "branch")} />
+                                <label className={styles.droplabel}> Class Teacher </label>
+                                <Select
+                                        styles={colourStyles}
+                                        value={this.state.teacherclassId}
+                                        placeholder="Tap to view teachers"
+                                        onChange={this.handleChange}
+                                        options={this.state.teachernameoptions}
+                                    />
 
-                                <label className={styles.label}> Class Teacher </label>
-                                <input value={this.state.classroomteacher} className={styles.input} type="text" onChange={(event) => this.handleClassEvent(event, "teacher")} />
-
-                                <label className={styles.label}>  Category </label>
+                                <label className={styles.label3}>  Category </label>
                                 <div className={styles.radio}>
                                             <label className={styles.radiolabel}>
                                                 <input type="radio" value="Pre-Primary" checked={this.state.classCategory === 'Pre-Primary'} onChange={this.handleOptionChange.bind(this)} />
@@ -681,6 +851,7 @@ export class branch extends Component {
                                                 <input type="radio" value="Primary" checked={this.state.classCategory === 'Primary'} onChange={this.handleOptionChange.bind(this)}/>
                                                 Primary
                                             </label>
+                                            </div> <div className={styles.radio}>
                                             <label className={styles.radiolabel}>
                                                 <input type="radio" value="Secondary" checked={this.state.classCategory === 'Secondary'} onChange={this.handleOptionChange.bind(this)}/>
                                                 Secondary
@@ -744,12 +915,12 @@ export class branch extends Component {
                                 <h1 className={styles.heading}> Teacher Details Form </h1>
                                 <div> 
                                     <label className={styles.label}> Name </label>
-                                    <input value={this.state.orgName} className={styles.input} type="text" onChange={(event) => this.handleEvent(event, "name")} />
+                                    <input value={this.state.teachername} className={styles.input} type="text" onChange={(event) => this.handleTeacherEvent(event, "name")} />
 
                                     <label className={styles.droplabel}> Class </label>
                                     <Select
                                         styles={colourStyles}
-                                        value={this.state.classname}
+                                        value={this.state.teacherclassId}
                                         placeholder="Tap to view classes"
                                         onChange={this.handleChange}
                                         options={this.state.classnameoptions}
@@ -757,16 +928,16 @@ export class branch extends Component {
                                 </div>
 
                                 <label className={styles.label}> Email </label>
-                                <input value={this.state.orgEmail} className={styles.input} type="text" onChange={(event) => this.handleEvent(event, "email")} />
+                                <input value={this.state.teacheremail} className={styles.input} type="text" onChange={(event) => this.handleTeacherEvent(event, "email")} />
 
                                 <label className={styles.label}> Address </label>
-                                <input value={this.state.orgAddress} className={styles.input} type="text" onChange={(event) => this.handleEvent(event, "address")} />
+                                <input value={this.state.teacheraddress} className={styles.input} type="text" onChange={(event) => this.handleTeacherEvent(event, "address")} />
 
                                 <label className={styles.label}> Phone Number </label>
-                                <input value={this.state.orgMobile} className={styles.input} type="text" onChange={(event) => this.handleEvent(event, "mobile")} />
+                                <input value={this.state.teachermobileno} className={styles.input} type="text" onChange={(event) => this.handleTeacherEvent(event, "mobile")} />
 
                                 <button onClick={this.clickhandler} className={styles.button2}> Cancel </button>
-                                <button onClick={this.onFormSubmit} className={styles.button3}> Submit </button>
+                                <button onClick={this.onFormTeacherSubmit} className={styles.button3}> Submit </button>
                             </div>
                         </Modal>
                     </div>
@@ -814,7 +985,7 @@ export class branch extends Component {
                                 <h1 className={styles.heading}> Student Details Form </h1>
                                 <div> 
                                     <label className={styles.label}> Name </label>
-                                    <input value={this.state.orgName} className={styles.input} type="text" onChange={(event) => this.handleEvent(event, "name")} />
+                                    <input value={this.state.studentname} className={styles.input} type="text" onChange={(event) => this.handleStudentEvent(event, "name")} />
 
                                     <label className={styles.droplabel}> Class </label>
                                     <Select
@@ -827,16 +998,16 @@ export class branch extends Component {
                                 </div>
 
                                 <label className={styles.label}> Email </label>
-                                <input value={this.state.orgEmail} className={styles.input} type="text" onChange={(event) => this.handleEvent(event, "email")} />
+                                <input value={this.state.studentemail} className={styles.input} type="text" onChange={(event) => this.handleStudentEvent(event, "email")} />
 
                                 <label className={styles.label}> Address </label>
-                                <input value={this.state.orgAddress} className={styles.input} type="text" onChange={(event) => this.handleEvent(event, "address")} />
+                                <input value={this.state.studentaddress} className={styles.input} type="text" onChange={(event) => this.handleStudentEvent(event, "address")} />
 
                                 <label className={styles.label}> Phone Number </label>
-                                <input value={this.state.orgMobile} className={styles.input} type="text" onChange={(event) => this.handleEvent(event, "mobile")} />
+                                <input value={this.state.studentmobile} className={styles.input} type="text" onChange={(event) => this.handleStudentEvent(event, "mobile")} />
 
                                 <button onClick={this.clickhandler} className={styles.button2}> Cancel </button>
-                                <button onClick={this.onFormSubmit} className={styles.button3}> Submit </button>
+                                <button onClick={this.onFormStudentSubmit} className={styles.button3}> Submit </button>
                             </div>
                         </Modal>
                     </div>

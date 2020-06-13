@@ -31,7 +31,10 @@ export class admin extends Component {
         orgMobile: '',
         adminName: '',
         adminEmail: '',
-        adminMobile: ''
+        adminMobile: '',
+        selectedUrl: '',
+        showVideo: false,
+        contentoptions: []
     };
 
     componentDidMount(){
@@ -194,14 +197,26 @@ export class admin extends Component {
     handleClick = value => {
         if (value === "tab1") {
             this.setState({
-                selectedtab1: !this.state.selectedtab1,
+                selectedtab1: true,
                 selectedtab2: false
             })
         } else if (value === "tab2") {
             this.setState({
-                selectedtab2: !this.state.selectedtab2,
+                selectedtab2: true,
                 selectedtab1: false
             })
+
+            axios.get(config.serverUrl + "content")
+            .then(response => {
+               if (response.status === 200){ 
+                this.setState({
+                    contentoptions: response.data
+                    })
+                }}
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
         }
     }
 
@@ -221,10 +236,31 @@ export class admin extends Component {
         })
     }
 
+    onButtonClick = (url) => {
+        this.setState({
+            selectedUrl: url,
+            showVideo: true
+        })
+    }
+
+    closeModal = () => {
+        this.setState({
+            showVideo: false
+        })
+    }
+
+
     render() {
 
-        let org = this.state.orgOptions
-        console.log(org)
+        let contentcard = this.state.contentoptions.map((item) => {
+            return (
+                <div className={styles.item8}>
+                    <label className={styles.text17}> {item.name} </label>
+                    <label className={styles.text18}> {item.category} </label>
+                    <button onClick={() => this.onButtonClick(item.url)} className={styles.button6}> Play Video </button>
+                </div>
+            )
+        })
 
         let admincard = this.state.adminOptions.map((item) => {
             return (
@@ -377,16 +413,50 @@ export class admin extends Component {
                 : null }
 
                 {this.state.selectedtab2 ? 
-                <div className={styles.player}>
-                    <ReactPlayer 
-                        url='https://www.youtube.com/watch?v=iofuy7tTiYE'
-                        playing={true}
-                        controls={true}
-                        loop={true}
-                        width={900}
-                        height={500}
-                    />
-                </div> 
+                    
+                    <div>
+                    <label className={styles.heading}> Content Available </label>
+                    { this.state.sideDrawerOpen ? 
+                    <div style={{position: 'absolute', top: '150px'}}>
+                            <div className={styles.item7}>
+                                <label className={styles.text14} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '525px'}}> Content Name </label>
+                                <label className={styles.text15} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '775px'}}> Category </label>
+                                <label className={styles.text16} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '1050px'}}> Action </label>
+                            </div>
+                    </div>
+                    :
+                    <div style={{position: 'absolute', top: '150px'}}>
+                        <div className={styles.item4}>
+                            <label className={styles.text5} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '75px'}}> Content Name </label>
+                            <label className={styles.text6} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '400px'}}> Category </label>
+                            <label className={styles.text7} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '675px'}}> OAction </label>
+                        </div>
+                    </div> }
+
+                    <div style={{position: 'absolute', top: '250px', right: '165px'}}>
+                    {contentcard}
+                    </div> 
+
+                    { this.state.showVideo ? 
+                    <div> 
+                        <Modal type="video" show={this.state.showVideo}>
+                            <div>
+                            <div className={styles.player}>
+                                    <ReactPlayer 
+                                            url={this.state.selectedUrl}
+                                            playing={true}
+                                            controls={true}
+                                            loop={true}
+                                            width={900}
+                                            height={500}
+                                        />
+                                    </div> 
+                                <button onClick={this.closeModal} className={styles.button7}> Cancel </button>
+                            </div>
+                        </Modal>
+                    </div>
+                    : null }
+                </div>
                 : null }
             </div>
         )

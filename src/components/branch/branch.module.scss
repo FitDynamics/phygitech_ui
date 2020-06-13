@@ -196,6 +196,19 @@
     margin: 20px 72px;
 }
 
+.label3 {
+    height: 24px;
+    width: 250px;
+    color: rgb(0, 0, 0);
+    font-family: 'Gilroy';
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 28px;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 40px 72px;
+}
+
 .input {
     height: 32px;
     width: 250px;
@@ -287,9 +300,53 @@
 
 .radio {
     margin-left: 72px;
+    margin-bottom: 24px;
 }
 
 .radiolabel {
     font-size: 20px;
-    margin-right: 12px;
+    margin-right: 80px;
+}
+
+.text9 {
+    height: 24px;
+    width: 250px;
+    position: absolute;
+    left: 25px;
+    color: rgb(0, 0, 0);
+    font-family: 'Gilroy';
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 28px;
+    border-radius: 4px;
+    padding: 12px 24px;
+}
+
+
+.text10 {
+    height: 24px;
+    width: 205px;
+    position: absolute;
+    left: 350px;
+    color: rgb(0, 0, 0);
+    font-family: 'Gilroy';
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 28px;
+    border-radius: 4px;
+    padding: 12px 24px;
+}
+
+.text11 {
+    height: 24px;
+    width: 185px;
+    position: absolute;
+    left: 625px;
+    color: rgb(0, 0, 0);
+    font-family: 'Gilroy';
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 28px;
+    border-radius: 4px;
+    padding: 12px 24px;
 }

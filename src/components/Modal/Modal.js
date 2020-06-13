@@ -6,7 +6,7 @@ const Modal = ({ handleClose, show, type, children }) => {
   
     return (
       <div className={ show ? styles.modalBlock : styles.modalNone }>
-        <section className={ ((type === "org") ? styles.modalMain : null) || ((type === "admin") ? styles.modalMain2 : null)}>
+        <section className={ ((type === "org") ? styles.modalMain : null) || ((type === "admin") ? styles.modalMain2 : null) || ((type === "video") ? styles.modalMain3 : null)}>
           {children}
         </section>
       </div>

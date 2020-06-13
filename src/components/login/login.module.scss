@@ -1,7 +1,7 @@
 .mainrectangle {
     height: 140px;
-    width: 1440px;
-    background-color: #F0FAFB
+    width: 100%;
+    background-color: #7ccdfc
 }
 
 .top {
@@ -31,7 +31,7 @@
 .text2 {
     display: inline-block;
     height: 24px;
-    width: 160px;
+    width: 300px;
     color: #3C3C3B;
     font-family:  'Gilroy';
     font-size: 24px;
@@ -61,7 +61,7 @@
     display: inline-block;
     height: 525px;
     width: 450px;
-    background-color: #F0FAFB;
+    background-color: #7ccdfc;
     margin-left: 825px;
     margin-top: 60px;
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.15)
@@ -91,9 +91,9 @@
     font-size: 20px;
     letter-spacing: 0;
     line-height: 56px;
-    text-align: center;
+    text-align: left;
     margin-top: 64px;
-    margin-left: 16px;
+    margin-left: 20px;
 }
 
 
@@ -106,9 +106,9 @@
     font-size: 20px;
     letter-spacing: 0;
     line-height: 56px;
-    text-align: center;
+    text-align: left;
     margin-top: 16px;
-    margin-left: -42px;
+    margin-left: 20px;
 }
 
 .input {
@@ -134,7 +134,7 @@
     width: 266px;
     border-radius: 8px;
     border-color: rgba(0, 0, 0, 0.15);
-    background-color: rgb(82, 127, 252);
+    background-color: rgb(21, 75, 224);
     margin-top: 56px;
     cursor: pointer;
     font-family: 'Gilroy';

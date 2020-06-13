@@ -598,6 +598,20 @@ export class branch extends Component {
         })
     }
 
+    formatDate = (date) => { 
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        return [day, month, year].join('-');
+    }
+
     render() {
 
         let classcard = this.state.classnameoptions.map((item) => {
@@ -678,13 +692,13 @@ export class branch extends Component {
                     { this.state.sideDrawerOpen ? 
                     <div className={styles.item}>
                             <label className={styles.text}> {item.name} </label>
-                            <label className={styles.text2}> {item.date }</label>
+                            <label className={styles.text2}> {this.formatDate(item.date)}</label>
                             <label className={styles.text3}> {item.starttime} </label>
                             <label className={styles.text4}> {item.endtime} </label>
                     </div> : 
                     <div className={styles.item2}>
                             <label className={styles.text5}> {item.name} </label>
-                            <label className={styles.text6}> {item.date }</label>
+                            <label className={styles.text6}> {this.formatDate(item.date)}</label>
                             <label className={styles.text7}> {item.starttime} </label>
                             <label className={styles.text8}> {item.endtime} </label>
                     </div> 
@@ -701,7 +715,7 @@ export class branch extends Component {
                 {this.state.sideDrawerOpen ? 
                     <SideDrawer 
                         show={ this.backdropClickHandler } 
-                        name="Org"
+                        name = "Institution"
                         tab1 = "Schedule Class"
                         tab2 = "Classrooms"
                         tab3 = "Teacher List"
@@ -716,7 +730,7 @@ export class branch extends Component {
 
                 {this.state.selectedtab1 ? 
                 <div>
-                    <button onClick={this.clickhandler} className={styles.button}> + add meeting </button>
+                    <button onClick={this.clickhandler} className={styles.button}> + add session </button>
 
                     { this.state.sideDrawerOpen ? 
                     <div style={{position: 'absolute', top: '200px', right: '50px'}}>
@@ -750,7 +764,7 @@ export class branch extends Component {
                     <div> 
                         <Modal type="org" show={this.state.addorg}>
                             <div>
-                                <h1 className={styles.heading}> Meeting Details Form </h1>
+                                <h1 className={styles.heading}> Session Details Form </h1>
                                 <label className={styles.label}> Name </label>
                                 <input placeholder="enter the meeting name" value={this.state.name} className={styles.input} type="text" onChange={(event) => this.handleEvent(event)} />
 

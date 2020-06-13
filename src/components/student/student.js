@@ -82,6 +82,21 @@ export class student extends Component {
         window.open(`https://app.gotomeeting.com/index.html?meetingid=${meetingId}`)
     }
 
+
+    formatDate = (date) => { 
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        return [day, month, year].join('-');
+    }
+
     render() {
 
         console.log(this.state.selectedtab2)
@@ -102,14 +117,14 @@ export class student extends Component {
                     { this.state.sideDrawerOpen ? 
                     <div className={styles.item}>
                             <label className={styles.text}> {item.name} </label>
-                            <label className={styles.text2}> {item.date }</label>
+                            <label className={styles.text2}> {this.formatDate(item.date)}</label>
                             <label className={styles.text3}> {item.starttime} </label>
                             <label className={styles.text4}> {item.endtime} </label>
                             <button onClick={() => this.buttonHandler(item.meetingId)} className={styles.button2}> Join </button>
                     </div> : 
                     <div className={styles.item2}>
                             <label className={styles.text5}> {item.name} </label>
-                            <label className={styles.text6}> {item.date }</label>
+                            <label className={styles.text6}> {this.formatDate(item.date)}</label>
                             <label className={styles.text7}> {item.starttime} </label>
                             <label className={styles.text8}> {item.endtime} </label>
                     </div> 

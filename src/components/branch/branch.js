@@ -363,9 +363,11 @@ export class branch extends Component {
         let innerobj = {
             name: this.state.name,
             date: date,
-            starttime: starttime,
-            endtime: endtime
+            starttime: this.state.starttime,
+            endtime: this.state.endtime
         }
+
+        console.log(innerobj)
 
         this.state.meetingoptions.push(innerobj)
 
@@ -418,7 +420,7 @@ export class branch extends Component {
         let userData = {
             email: this.state.teacheremail,
             role: "teacher",
-            password: this.state.teachermobileno
+            password: "teacher"
         }
 
         axios.post(config.serverUrl + "teacher", data )
@@ -466,7 +468,7 @@ export class branch extends Component {
         let userData = {
             email: this.state.studentemail,
             role: "student",
-            password: this.state.studentmobile
+            password: "student"
         }
 
         axios.post(config.serverUrl + "student", data )

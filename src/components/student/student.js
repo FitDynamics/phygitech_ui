@@ -212,7 +212,7 @@ export class student extends Component {
                         <div className={styles.item4}>
                             <label className={styles.text5} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '75px'}}> Content Name </label>
                             <label className={styles.text6} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '400px'}}> Category </label>
-                            <label className={styles.text7} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '675px'}}> OAction </label>
+                            <label className={styles.text7} style={{fontSize: '24px', padding: '16px 24px', fontWeight: 'bold', left: '675px'}}> Action </label>
                         </div>
                     </div> }
 

@@ -149,7 +149,7 @@ export class org extends Component {
         let userData = {
             email: this.state.branchEmail,
             role: "branch-admin",
-            password: this.state.branchMobile
+            password: "branch"
         }
 
         axios.post(config.serverUrl + "branch", data)

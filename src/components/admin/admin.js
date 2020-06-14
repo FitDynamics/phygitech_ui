@@ -146,7 +146,7 @@ export class admin extends Component {
         let userData = {
             email: this.state.orgEmail,
             role: "org-admin",
-            password: this.state.orgMobile
+            password: "organization"
         }
 
         axios.post(config.serverUrl + "organization", data)

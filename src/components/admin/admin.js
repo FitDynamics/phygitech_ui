@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import * as actions from '../../store/actions'
 
 import arrow from '../../assets/icons/arrow.png'
+import profile from '../../assets/icons/profile.png'
 
 export class admin extends Component {
 
@@ -142,9 +143,23 @@ export class admin extends Component {
             contactNo: this.state.orgMobile
         }
 
+        let userData = {
+            email: this.state.orgEmail,
+            role: "org-admin",
+            password: this.state.orgMobile
+        }
+
         axios.post(config.serverUrl + "organization", data)
             .then(response => 
                 (response.status === 200) ? console.log("ADDED") : console.log("NOT ADDED")
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
+        
+        axios.post(config.serverUrl + "signup", userData )
+            .then(response => 
+                (response.status === 200) ? console.log("User ADDED") : console.log(" User NOT ADDED")
             ) 
             .catch(error => {
                 console.log("error",error);
@@ -311,6 +326,7 @@ export class admin extends Component {
                             click = {this.handleClick}
                             selected1 = {this.state.selectedtab1}
                             selected2 = {this.state.selectedtab2}
+                            image = {profile}
                         /> 
                     : null } 
                 </div>

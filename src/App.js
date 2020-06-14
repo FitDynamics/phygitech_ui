@@ -22,6 +22,24 @@ let app = (
 )
 
 class App extends Component {
+
+  componentDidMount() {
+    setTimeout(() => this.setState({ loading: false }), 50);
+          var allowURL = 0;
+          var URL = window.location.pathname;
+
+          switch (URL) {
+          case '/':
+          allowURL = 1;
+          break;
+          default:
+          allowURL = 0;
+          }
+          if (allowURL === 0) {
+          window.location.href = '/';
+          }
+    }
+
   render () {
     return app
   }

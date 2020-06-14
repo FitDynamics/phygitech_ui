@@ -3,7 +3,6 @@ import { updateObject } from './utility';
 
 const initialState = {
     sample: [],
-    role: '',
     meetingName: '',
     meetingDate: '',
     meetingStartTime: '',
@@ -16,12 +15,6 @@ const initialState = {
 const initState = () => {
     return initialState;
 }
-
-const getPageData = (state, action) => {
-    return updateObject(state, {
-        role: action.role
-    });
-};
 
 const sendMeetingData = (state, action) => {
     return updateObject(state, {
@@ -43,8 +36,6 @@ const sendData = (state, action) => {
 const reducer = (state = initState, action) => {
     switch (action.type) {
         case actionTypes.INIT_STATE: return initState();
-
-        case actionTypes.GET_PAGE_DATA: return getPageData(state, action);
 
         case actionTypes.SEND_MEETING_DATA: return sendMeetingData(state, action);
 

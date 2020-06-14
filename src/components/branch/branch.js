@@ -4,6 +4,7 @@ import styles from './branch.module.scss'
 import Modal from '../Modal/Modal'
 import axios from 'axios'
 import config from './../../config/config'
+import classStyle from './select'
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,120 +12,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import Toolbar from '../Toolbar/Toolbar'
 import SideDrawer from '../SideDrawer/SideDrawer'
 
-import arrow from '../../assets/icons/arrow.png'
+import image from '../../assets/icons/Branch.png'
 
 let finalDate = ''
 let finalStartTime = ''
 let finalEndTime = ''
-
-const colourStyles = {
-    container: (base, state) => {
-        return {
-            boxSizing: "border-box",
-            position: 'absolute',
-            top: 126,
-            left: 400
-        }
-    },
-    control: (base, state) => {
-        return {
-            boxSizing: "border-box",
-            height: 40,
-            width: 250,
-            border: '1.5px solid #000000',
-            borderRadius: 4,
-            backgroundColor: '#FFFFFF'
-        }
-    },
-    valueContainer: () => {
-        return {
-            height: 24,
-            width: 100,
-            color: '#939393',
-            fontFamily: 'Gilroy',
-            fontSize: 16,
-            letterSpacing: 0,
-            lineHeight: 19,
-            marginTop: 12,
-            marginLeft: 16
-        }
-    },
-    singleValue: () => {
-        return {
-            height: 24,
-            width: 100,
-            color: '#3C3C3B',
-            fontFamily: 'Gilroy-Bold',
-            fontSize: 18,
-            fontWeight: 500,
-            letterSpacing: 0,
-            lineHeight: 19,
-            marginTop: -164
-        }
-    },
-    indicatorsContainer: () => {
-        return {
-            position: 'absolute',
-            top: 0,
-            left: 200
-        }
-    },
-    indicatorSeparator: () => null,
-    dropdownIndicator: (base, state) => {
-        return {
-            ...base,
-            padding: '10px',
-            fontSize: '12px'
-        }
-    },
-
-    input: () => {
-        return {
-            height: 0,
-            width: 0,
-            outline: 'none',
-            display: 'inline-block',
-            cursor: 'pointer',
-            marginTop: '-5.04166vw'
-        }
-    },
-    placeholder: () => {
-        return {
-            height: 24,
-            width: 160,
-            fontFamily: 'Gilroy',
-            fontSize: 18,
-            position: 'absolute',
-            top: -150
-        }
-    },
-    option: (base, state) => {
-        return {
-            ...base,
-            height: 24,
-            width: 250,
-            cursor: 'pointer',
-            fontFamily: 'Gilroy',
-            fontSize: 16,
-            padding: 6
-        };
-    },
-
-    menu: (base, state) => ({
-        marginTop: -0.5,
-        boxShadow: "0 0px 16px 0 rgba(0,0,0,0.15)",
-        backgroundColor: '#FFFFFF'
-        
-    }),
-    menuList: (base, state) => ({
-        ...base,
-        padding: 0,
-        boxShadow: "0 0px 16px 0 rgba(0,0,0,0.15)",
-        borderRadius: 8,
-        height: 'auto',
-        width: 250
-    }),
-};
 
 export class branch extends Component {
 
@@ -454,9 +346,9 @@ export class branch extends Component {
 
         let data = {
             name: this.state.name,
-            scheduledDate: date,
-            startTime: starttime,
-            endTime: endtime,
+            scheduledDate: this.state.date,
+            startTime: this.state.starttime,
+            endTime: this.state.endtime,
             uniqueMeetingId: meetingID
         }
 
@@ -487,7 +379,7 @@ export class branch extends Component {
         let data = {
             name: this.state.classroomname,
             category: this.state.classCategory,
-            classTeacher: this.state.teacherclassId.value
+            // classTeacher: this.state.teacherclassId.value
         }
 
         axios.post(config.serverUrl + "classroom", data )
@@ -501,7 +393,7 @@ export class branch extends Component {
         let innerobj = {
             name: this.state.classroomname,
             category: this.state.classCategory,
-            teacher: this.state.teacherclassId.label
+            // teacher: this.state.teacherclassId.label
         }
 
         this.state.classroomoptions.push(innerobj)
@@ -523,6 +415,12 @@ export class branch extends Component {
             }
         }
 
+        let userData = {
+            email: this.state.teacheremail,
+            role: "teacher",
+            password: this.state.teachermobileno
+        }
+
         axios.post(config.serverUrl + "teacher", data )
             .then(response => 
                 (response.status === 200) ? console.log("ADDED") : console.log("NOT ADDED")
@@ -530,6 +428,15 @@ export class branch extends Component {
             .catch(error => {
                 console.log("error",error);
             });
+
+        axios.post(config.serverUrl + "signup", userData )
+            .then(response => 
+                (response.status === 200) ? console.log("User ADDED") : console.log(" User NOT ADDED")
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
+
         let innerobj = {
             name: this.state.teachername,
             mobileNo: this.state.teachermobileno,
@@ -556,6 +463,12 @@ export class branch extends Component {
             }
         }
 
+        let userData = {
+            email: this.state.studentemail,
+            role: "student",
+            password: this.state.studentmobile
+        }
+
         axios.post(config.serverUrl + "student", data )
             .then(response => 
                 (response.status === 200) ? console.log("ADDED") : console.log("NOT ADDED")
@@ -563,7 +476,16 @@ export class branch extends Component {
             .catch(error => {
                 console.log("error",error);
             });
-
+        
+        axios.post(config.serverUrl + "signup", userData )
+            .then(response => 
+                (response.status === 200) ? console.log("User ADDED") : console.log(" User NOT ADDED")
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
+        
+        
         let innerobj = {
             name: this.state.studentname,
             mobileNo: this.state.studentmobile,
@@ -673,7 +595,6 @@ export class branch extends Component {
                             <label className={styles.text2}> {item.mobileNo }</label>
                             <label className={styles.text3}> {item.address} </label>
                             <label className={styles.text4}> {item.class} </label>
-                            <img onClick={this.classList} src={arrow} alt="arrow" style={{marginLeft: 875, height: 12, width: 20, marginTop: 18}} />
                     </div> : 
                     <div className={styles.item2}>
                             <label className={styles.text5}> {item.name} </label>
@@ -687,20 +608,22 @@ export class branch extends Component {
         })
 
         let meetingcard = this.state.meetingoptions.map((item) => {
+            let start = new Date(item.starttime)
+            let end = new Date(item.endtime)
             return (
                 <div>
                     { this.state.sideDrawerOpen ? 
                     <div className={styles.item}>
                             <label className={styles.text}> {item.name} </label>
                             <label className={styles.text2}> {this.formatDate(item.date)}</label>
-                            <label className={styles.text3}> {item.starttime} </label>
-                            <label className={styles.text4}> {item.endtime} </label>
+                            <label className={styles.text3}> {this.formatAMPM(start)} </label>
+                            <label className={styles.text4}> {this.formatAMPM(end)} </label>
                     </div> : 
                     <div className={styles.item2}>
                             <label className={styles.text5}> {item.name} </label>
                             <label className={styles.text6}> {this.formatDate(item.date)}</label>
-                            <label className={styles.text7}> {item.starttime} </label>
-                            <label className={styles.text8}> {item.endtime} </label>
+                            <label className={styles.text7}> {this.formatAMPM(start)} </label>
+                            <label className={styles.text8}> {this.formatAMPM(end)} </label>
                     </div> 
                     }   
                 </div>
@@ -725,6 +648,7 @@ export class branch extends Component {
                         selected2 = {this.state.selectedtab2}
                         selected3 = {this.state.selectedtab3}
                         selected4 = {this.state.selectedtab4}
+                        image = {image}
                     /> 
                 : null } 
 
@@ -848,7 +772,7 @@ export class branch extends Component {
 
                                 <label className={styles.droplabel}> Class Teacher </label>
                                 <Select
-                                        styles={colourStyles}
+                                        styles={classStyle}
                                         value={this.state.teacherclassId}
                                         placeholder="Tap to view teachers"
                                         onChange={this.handleChange}
@@ -933,7 +857,7 @@ export class branch extends Component {
 
                                     <label className={styles.droplabel}> Class </label>
                                     <Select
-                                        styles={colourStyles}
+                                        styles={classStyle}
                                         value={this.state.teacherclassId}
                                         placeholder="Tap to view classes"
                                         onChange={this.handleChange}
@@ -1003,7 +927,7 @@ export class branch extends Component {
 
                                     <label className={styles.droplabel}> Class </label>
                                     <Select
-                                        styles={colourStyles}
+                                        styles={classStyle}
                                         value={this.state.classname}
                                         placeholder="Tap to view classes"
                                         onChange={this.handleChange}

@@ -5,9 +5,10 @@ import config from './../../config/config'
 import ReactPlayer from 'react-player'
 import Modal from '../Modal/Modal'
 
-
 import Toolbar from '../Toolbar/Toolbar'
 import SideDrawer from '../SideDrawer/SideDrawer'
+
+import profile from '../../assets/icons/profile.png'
 
 export class student extends Component {
 
@@ -82,6 +83,16 @@ export class student extends Component {
         window.open(`https://app.gotomeeting.com/index.html?meetingid=${meetingId}`)
     }
 
+    formatAMPM = (date) =>  {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
 
     formatDate = (date) => { 
         var d = new Date(date),
@@ -112,21 +123,24 @@ export class student extends Component {
         })
 
         let meetingcard = this.state.options.map((item) => {
+            let start = new Date(item.starttime)
+            let end = new Date(item.endtime)
+
             return (
                 <div>
                     { this.state.sideDrawerOpen ? 
                     <div className={styles.item}>
                             <label className={styles.text}> {item.name} </label>
                             <label className={styles.text2}> {this.formatDate(item.date)}</label>
-                            <label className={styles.text3}> {item.starttime} </label>
-                            <label className={styles.text4}> {item.endtime} </label>
+                            <label className={styles.text3}> {this.formatAMPM(start)} </label>
+                            <label className={styles.text4}> {this.formatAMPM(end)} </label>
                             <button onClick={() => this.buttonHandler(item.meetingId)} className={styles.button2}> Join </button>
                     </div> : 
                     <div className={styles.item2}>
                             <label className={styles.text5}> {item.name} </label>
                             <label className={styles.text6}> {this.formatDate(item.date)}</label>
-                            <label className={styles.text7}> {item.starttime} </label>
-                            <label className={styles.text8}> {item.endtime} </label>
+                            <label className={styles.text7}> {this.formatAMPM(start)} </label>
+                            <label className={styles.text8}>  {this.formatAMPM(end)} </label>
                     </div> 
                     }   
                 </div>
@@ -145,6 +159,7 @@ export class student extends Component {
                         click = {this.handleClick}
                         selected1 = {this.state.selectedtab1}
                         selected2 = {this.state.selectedtab2}
+                        image = {profile}
                     /> 
                 : null } 
 

@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import * as actions from './../../store/actions'
 import styles from './login.module.scss'
 import axios from 'axios'
 import config from './../../config/config'
 import top from '../../assets/icons/Top.png'
 import diagram from '../../assets/icons/diagram.png'
+import { connect } from 'react-redux'
+import * as actions from '../../store/actions'
 
-export class login extends Component {
+class login extends Component {
 
     state = {
         email: '',
-        pwd: ''
+        pwd: '',
+        role: ''
     };
     handlePwdEvent = event => {
         this.setState({
@@ -25,35 +26,62 @@ export class login extends Component {
         })
     }
 
-    handleClick = () => {
-        let data = {
-            email: this.state.email,
-            password: this.state.pwd
-        }
-
-        axios.post(config.serverUrl + "login", data)
-        .then(response => {
-            //console.log(response)
-            if (response.status === 200){ 
-                console.log(response)
-                this.props.getRole = response.data.data.role;
-                this.props.accessToken = response.data.accessToken;
+    getRole = (email, password) => {
+        return new Promise((resolve, reject) => {
+            let data = {
+                email: email,
+                password: password
             }
-        }) 
-        .catch(error => {
-            console.log("error",error);
-        });
-        //this.props.accessToken.push(response.data.accessToken);
-        //this.props.onGetPageData(email, password)
-        console.log(this.props);
-        if (this.props.getRole === "super-admin") {
+
+            axios.post(config.serverUrl + "login", data)
+            .then(response => {
+                //console.log(response)
+                if (response.status === 200){ 
+                    console.log(response.data)
+                    resolve(response.data.data.role)
+                    this.props.onSendData(null, response.data.data.orgID)
+                }
+            }) 
+            .catch(error => {
+                console.log("error",error);
+            });
+        })
+    }
+
+    handleClick = async () => {
+
+        const role = await this.getRole(this.state.email, this.state.pwd)
+
+        if(role === "super-admin") {
             this.props.history.push({
                 pathname: "/admin",
-                state: true })
+                state: true
+            })
+        } else if (role === "org-admin") {
+            this.props.history.push({
+                pathname: "/org",
+                state: true
+            })
+        } else if (role === "branch-admin") {
+            this.props.history.push({
+                pathname: "/branch",
+                state: true
+            })
+        } else if (role === "teacher") {
+            this.props.history.push({
+                pathname: "/teacher",
+                state: true
+            })
+        } else if (role === "student") {
+            this.props.history.push({
+                pathname: "/student",
+                state: true
+            })
         }
     }
 
     render() {
+
         return (
             <div style = {{ overflowY: "scroll", width: 1440, height: "auto"}}>
                 <div className={styles.mainrectangle}> 
@@ -84,15 +112,11 @@ export class login extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        getRole: state.role
-    }
-}
 const mapDispatchToProps = dispatch => {
     return {
-        onGetPageData: (email, password) => dispatch(actions.getPageData(email, password))
+        onSendData: (name, id) => dispatch(actions.sendData(name, id))
     };
 };
 
-export default (withRouter(connect(mapStateToProps, mapDispatchToProps)(login)))
+
+export default withRouter(connect(null, mapDispatchToProps)(login))

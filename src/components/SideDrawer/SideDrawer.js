@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import styles from  './SideDrawer.module.scss'
 
 import group from '../../assets/icons/group.png'
-import profile from '../../assets/icons/profile.png'
 
 export class SideDrawer extends Component {
 
@@ -24,7 +23,7 @@ export class SideDrawer extends Component {
                             </div>
                         </div>
                         <div>
-                            <img src={profile} alt="profile" className={styles.image2} />
+                            <img src={this.props.image} alt="profile" className={styles.image2} />
                         </div>
 
                         <label className={styles.text}> {this.props.name} </label>

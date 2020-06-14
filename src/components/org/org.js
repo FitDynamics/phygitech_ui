@@ -10,6 +10,7 @@ import axios from 'axios'
 import config from '../../config/config'
 
 import arrow from '../../assets/icons/arrow.png'
+import image from '../../assets/icons/Institution.png'
 
 export class org extends Component {
 
@@ -145,9 +146,23 @@ export class org extends Component {
             organization: this.state.orgId
         }
 
+        let userData = {
+            email: this.state.branchEmail,
+            role: "branch-admin",
+            password: this.state.branchMobile
+        }
+
         axios.post(config.serverUrl + "branch", data)
             .then(response => 
                 (response.status === 200) ? console.log("ADDED") : console.log("NOT ADDED")
+            ) 
+            .catch(error => {
+                console.log("error",error);
+            });
+
+        axios.post(config.serverUrl + "signup", userData )
+            .then(response => 
+                (response.status === 200) ? console.log("User ADDED") : console.log(" User NOT ADDED")
             ) 
             .catch(error => {
                 console.log("error",error);
@@ -261,8 +276,9 @@ export class org extends Component {
                     {this.state.sideDrawerOpen ? 
                         <SideDrawer 
                             show = { this.backdropClickHandler } 
-                            name = "Admin"
+                            name = "Institution"
                             tab1 = "Branch List"
+                            image = {image}
                             //click = {this.handleClick}
                             selected1 = {this.state.selectedtab1}
                         /> 
